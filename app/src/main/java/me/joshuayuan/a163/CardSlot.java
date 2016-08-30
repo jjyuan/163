@@ -15,10 +15,14 @@ import java.util.LinkedList;
  */
 public class CardSlot extends Button {
     private CardNode card;
+    private Context context;
+
 
 
     public CardSlot(Context context, AttributeSet attrs){
         super(context, attrs);
+        this.context = context;
+
         this.card = null;
     }
 
@@ -33,8 +37,12 @@ public class CardSlot extends Button {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        Bitmap bm = Bitmap.createBitmap()
 
+        if (card!=null && card.getPosition()!=0){
+            System.out.print("redrawing card " + card.getValue() + " to queue ");
+            Bitmap bm = queuedBM();
+            canvas.drawBitmap(bm, 10, 40, null);
+        }
 
         super.onDraw(canvas);
 
@@ -57,9 +65,22 @@ public class CardSlot extends Button {
 
     private Bitmap queuedBM(){
         int p = this.card.getPosition();
+        System.out.println(p);
         switch (p){
             case 1:
-                return BitmapFactory.decodeResource(this.context.getResources())
+                return BitmapFactory.decodeResource(this.context.getResources(), R.drawable.queue1);
+            case 2:
+                return BitmapFactory.decodeResource(this.context.getResources(), R.drawable.queue2);
+            case 3:
+                return BitmapFactory.decodeResource(this.context.getResources(), R.drawable.queue3);
+            case 4:
+                return BitmapFactory.decodeResource(this.context.getResources(), R.drawable.queue4);
+            case 5:
+                return BitmapFactory.decodeResource(this.context.getResources(), R.drawable.queue5);
+            case 6:
+                return BitmapFactory.decodeResource(this.context.getResources(), R.drawable.queue6);
+            default:
+                return null;
         }
     }
 }

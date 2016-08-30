@@ -23,9 +23,15 @@ public class GameActivity extends AppCompatActivity {
     private CardSlot cardSlot4;
     private CardSlot cardSlot5;
     private CardSlot cardSlot6;
-    CardSlot[] cardSlots = new CardSlot[6];
+    private View[] slotViews = new View[6];
+    private CardSlot[] cardSlots = new CardSlot[6];
 
     private Queue theQ;
+
+    private Button opPLUS;
+    private Button opSUB;
+    private Button opMULT;
+    private Button opDIV;
 
 
     @Override
@@ -34,6 +40,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         gameMode = intent.getBooleanExtra("gameMode", PRACTICE_MODE);
+
+        slotViews[0] = findViewById(R.id.card_slot_1);
         cardSlot1 = (CardSlot) findViewById(R.id.card_slot_1);
         if(cardSlot1!=null){
 
@@ -47,10 +55,12 @@ public class GameActivity extends AppCompatActivity {
                         theQ.remove(c);
                     }
                     System.out.println(theQ);
+                    reDrawSlots();
 
                 }
             });
         }
+        slotViews[1] = findViewById(R.id.card_slot_2);
         cardSlot2 = (CardSlot) findViewById(R.id.card_slot_2);
         if(cardSlot2!=null){
 
@@ -64,10 +74,12 @@ public class GameActivity extends AppCompatActivity {
                         theQ.remove(c);
                     }
                     System.out.println(theQ);
+                    reDrawSlots();
 
                 }
             });
         }
+        slotViews[2] = findViewById(R.id.card_slot_3);
         cardSlot3 = (CardSlot) findViewById(R.id.card_slot_3);
         if(cardSlot3!=null){
 
@@ -81,10 +93,12 @@ public class GameActivity extends AppCompatActivity {
                         theQ.remove(c);
                     }
                     System.out.println(theQ);
+                    reDrawSlots();
 
                 }
             });
         }
+        slotViews[3] = findViewById(R.id.card_slot_4);
         cardSlot4 = (CardSlot) findViewById(R.id.card_slot_4);
         if(cardSlot4!=null){
 
@@ -98,10 +112,12 @@ public class GameActivity extends AppCompatActivity {
                         theQ.remove(c);
                     }
                     System.out.println(theQ);
+                    reDrawSlots();
 
                 }
             });
         }
+        slotViews[4] = findViewById(R.id.card_slot_5);
         cardSlot5 = (CardSlot) findViewById(R.id.card_slot_5);
         if(cardSlot5!=null){
 
@@ -115,10 +131,12 @@ public class GameActivity extends AppCompatActivity {
                         theQ.remove(c);
                     }
                     System.out.println(theQ);
+                    reDrawSlots();
 
                 }
             });
         }
+        slotViews[5] = findViewById(R.id.card_slot_6);
         cardSlot6 = (CardSlot) findViewById(R.id.card_slot_6);
         if(cardSlot6!=null){
 
@@ -132,6 +150,47 @@ public class GameActivity extends AppCompatActivity {
                         theQ.remove(c);
                     }
                     System.out.println(theQ);
+                    reDrawSlots();
+
+                }
+            });
+        }
+
+        opPLUS = (Button) findViewById(R.id.plus_button);
+        if (opPLUS != null) {
+            opPLUS.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        opSUB = (Button) findViewById(R.id.sub_button);
+        if (opSUB != null) {
+            opSUB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        opMULT = (Button) findViewById(R.id.mult_button);
+        if (opMULT != null) {
+            opMULT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
+        opDIV = (Button) findViewById(R.id.div_button);
+        if (opDIV != null) {
+            opDIV.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
                 }
             });
@@ -166,11 +225,13 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void relabel(){
-        return;
+
+    private void reDrawSlots(){
+        for(View v: slotViews){
+            v.invalidate();
+        }
 
     }
-
 
 
 }
