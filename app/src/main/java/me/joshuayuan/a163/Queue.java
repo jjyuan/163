@@ -61,6 +61,10 @@ public class Queue {
         decrement(2);
         System.out.println(toString());
 
+        if(q.size() < 2){
+            resetQueue();
+        }
+
         return newNode;
 
 
@@ -91,6 +95,15 @@ public class Queue {
             return null;
         } else {
             return q.get(1);
+        }
+    }
+    /*
+    *
+     */
+    private void resetQueue(){
+        for (CardNode c : q){
+            c.setPosition(0);
+            q.clear();
         }
     }
 }

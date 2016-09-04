@@ -12,6 +12,8 @@
     <string name="sub_button_text">-</string>
     <string name="mult_button_text">x</string>
     <string name="div_button_text">/</string>
+    <string name="split_button_text">[ -/- ]</string>
+    <string name="submit_buttom_text">=</string>
     
 
     <!-- Strings related to Settings -->

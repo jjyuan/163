@@ -16,14 +16,12 @@ import java.util.LinkedList;
 public class CardSlot extends Button {
     private CardNode card;
     private Context context;
-    public static int amount = 0;
 
 
     public CardSlot(Context context, AttributeSet attrs){
         super(context, attrs);
         this.context = context;
         this.card = null;
-        System.out.println("initializing cardslot " + ++amount);
     }
 
     @Override

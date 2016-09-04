@@ -79,4 +79,17 @@ public class CardNode {
     public void setCardSlotNumber(int cardSlot) {
         cardSlotNumber = cardSlot;
     }
+
+    public void printNodeTree(){
+        traverse(this);
+    }
+    private void traverse(CardNode cn){
+        if (cn == null){
+            return;
+        } else{
+            traverse(cn.child1);
+            System.out.println(cn);
+            traverse(cn.child2);
+        }
+    }
 }

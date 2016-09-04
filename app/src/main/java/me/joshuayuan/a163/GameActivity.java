@@ -38,6 +38,9 @@ public class GameActivity extends AppCompatActivity {
     private final int MULT = 3;
     private final int DIV = 4;
 
+    private Button splitButton;
+    private Button submitButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,9 +210,12 @@ public class GameActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if(theQ.getSize() >= 2){
 
-                        theQ.operate(SUB);
+                        int firstSlotNumber = theQ.getFirstNode().getCardSlotNumber();
+                        int secondSlotNumber = theQ.getSecondNode().getCardSlotNumber();
+                        clearTwoSlots(firstSlotNumber, secondSlotNumber);
 
-
+                        CardNode newNode = theQ.operate(SUB);
+                        getCardSlot(firstSlotNumber).setCard(newNode);
                         reDrawSlots();
                         relabel();
                     }
@@ -224,7 +230,12 @@ public class GameActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if(theQ.getSize() >= 2){
 
-                        theQ.operate(MULT);
+                        int firstSlotNumber = theQ.getFirstNode().getCardSlotNumber();
+                        int secondSlotNumber = theQ.getSecondNode().getCardSlotNumber();
+                        clearTwoSlots(firstSlotNumber, secondSlotNumber);
+
+                        CardNode newNode = theQ.operate(MULT);
+                        getCardSlot(firstSlotNumber).setCard(newNode);
                         reDrawSlots();
                         relabel();
                     }
@@ -238,13 +249,42 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if(theQ.getSize() >= 2){
-                        theQ.operate(DIV);
+                        int firstSlotNumber = theQ.getFirstNode().getCardSlotNumber();
+                        int secondSlotNumber = theQ.getSecondNode().getCardSlotNumber();
+                        clearTwoSlots(firstSlotNumber, secondSlotNumber);
+
+                        CardNode newNode = theQ.operate(DIV);
+                        getCardSlot(firstSlotNumber).setCard(newNode);
                         reDrawSlots();
                         relabel();
                     }
                 }
             });
         }
+
+        splitButton = (Button) findViewById(R.id.submit_button);
+        if (splitButton != null){
+            splitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    CardNode last = getLastNode();
+                    if ( last != null){
+                        last.printNodeTree();
+                    }
+                }
+            });
+        }
+
+        submitButton = (Button) findViewById(R.id.split_button);
+        if (submitButton != null){
+            submitButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+        }
+
         initialize();
         newCards();
 
@@ -303,9 +343,26 @@ public class GameActivity extends AppCompatActivity {
             if (c.getCard() != null){
                 c.setText(Double.toString(c.getCard().getValue()));
             } else{
-                c.setText("NULL");
+
+                c.setText("");
             }
 
+        }
+    }
+
+    private CardNode getLastNode(){
+        CardNode keep = null;
+        int count = 0;
+        for (CardSlot c : cardSlots){
+            if ( c.getCard() != null){
+                count++;
+                keep = c.getCard();
+            }
+        }
+        if (count==1){
+            return keep;
+        } else{
+            return null;
         }
     }
 }
