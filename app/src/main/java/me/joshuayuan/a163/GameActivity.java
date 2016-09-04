@@ -1,11 +1,19 @@
 package me.joshuayuan.a163;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.media.Image;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.LinkedList;
@@ -262,25 +270,31 @@ public class GameActivity extends AppCompatActivity {
             });
         }
 
-        splitButton = (Button) findViewById(R.id.submit_button);
+        splitButton = (Button) findViewById(R.id.split_button);
         if (splitButton != null){
             splitButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CardNode last = getLastNode();
-                    if ( last != null){
-                        last.printNodeTree();
-                    }
+//                    CardNode last = getLastNode();
+//                    if ( last != null){
+//                        last.printNodeTree();
+//                    }
                 }
             });
         }
 
-        submitButton = (Button) findViewById(R.id.split_button);
+        submitButton = (Button) findViewById(R.id.submit_button);
         if (submitButton != null){
             submitButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    if (getLastNode()!=null && getLastNode().getValue() == 163) {
+                        flashComplete();
+                        newCards();
+                        reDrawSlots();
+                    } else {
+                        flashIncomplete();
+                    }
                 }
             });
         }
@@ -364,5 +378,26 @@ public class GameActivity extends AppCompatActivity {
         } else{
             return null;
         }
+    }
+
+    private void flashIncomplete(){
+        LinearLayout background = (LinearLayout) findViewById(R.id.father_layout);
+        if (background!=null){
+            background.setBackgroundResource(R.drawable.incomplete);
+            TransitionDrawable td = (TransitionDrawable) background.getBackground();
+            td.startTransition(0);
+            td.reverseTransition(1000);
+        }
+
+    }
+    private void flashComplete(){
+        LinearLayout background = (LinearLayout) findViewById(R.id.father_layout);
+        if (background!=null){
+            background.setBackgroundResource(R.drawable.complete);
+            TransitionDrawable td = (TransitionDrawable) background.getBackground();
+            td.startTransition(0);
+            td.reverseTransition(1000);
+        }
+
     }
 }
