@@ -33,6 +33,10 @@ public class GameActivity extends AppCompatActivity {
     private Button opMULT;
     private Button opDIV;
 
+    private final int PLUS = 1;
+    private final int SUB = 2;
+    private final int MULT = 3;
+    private final int DIV = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     CardNode c = cardSlot1.getCard();
+                    if (c == null){
+                        return;
+                    }
                     if (c.getPosition() == 0){
                         theQ.add(c);
                     } else {
@@ -68,6 +75,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     CardNode c = cardSlot2.getCard();
+                    if (c == null){
+                        return;
+                    }
                     if (c.getPosition() == 0){
                         theQ.add(c);
                     } else {
@@ -87,6 +97,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     CardNode c = cardSlot3.getCard();
+                    if (c == null){
+                        return;
+                    }
                     if (c.getPosition() == 0){
                         theQ.add(c);
                     } else {
@@ -106,6 +119,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     CardNode c = cardSlot4.getCard();
+                    if (c == null){
+                        return;
+                    }
                     if (c.getPosition() == 0){
                         theQ.add(c);
                     } else {
@@ -125,6 +141,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     CardNode c = cardSlot5.getCard();
+                    if (c == null){
+                        return;
+                    }
                     if (c.getPosition() == 0){
                         theQ.add(c);
                     } else {
@@ -144,6 +163,9 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     CardNode c = cardSlot6.getCard();
+                    if (c == null){
+                        return;
+                    }
                     if (c.getPosition() == 0){
                         theQ.add(c);
                     } else {
@@ -161,7 +183,19 @@ public class GameActivity extends AppCompatActivity {
             opPLUS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    System.out.println("BEFORE ANYTHING: " + theQ);
+                    if( theQ.getSize() >= 2){
 
+                        int firstSlotNumber = theQ.getFirstNode().getCardSlotNumber();
+                        int secondSlotNumber = theQ.getSecondNode().getCardSlotNumber();
+                        clearTwoSlots(firstSlotNumber, secondSlotNumber);
+
+                        CardNode newNode = theQ.operate(PLUS);
+                        getCardSlot(firstSlotNumber).setCard(newNode);
+                        reDrawSlots();
+                        relabel();
+                    }
+                    System.out.println("AFTER EVERYTHING: " + theQ);
                 }
             });
         }
@@ -171,7 +205,14 @@ public class GameActivity extends AppCompatActivity {
             opSUB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(theQ.getSize() >= 2){
 
+                        theQ.operate(SUB);
+
+
+                        reDrawSlots();
+                        relabel();
+                    }
                 }
             });
         }
@@ -181,7 +222,12 @@ public class GameActivity extends AppCompatActivity {
             opMULT.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(theQ.getSize() >= 2){
 
+                        theQ.operate(MULT);
+                        reDrawSlots();
+                        relabel();
+                    }
                 }
             });
         }
@@ -191,7 +237,11 @@ public class GameActivity extends AppCompatActivity {
             opDIV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    if(theQ.getSize() >= 2){
+                        theQ.operate(DIV);
+                        reDrawSlots();
+                        relabel();
+                    }
                 }
             });
         }
@@ -214,6 +264,7 @@ public class GameActivity extends AppCompatActivity {
         for(int i = 0; i < cardSlots.length; i++){
             double num = rand.nextInt(13)+1;
             CardNode node = new CardNode(num);
+            node.setCardSlotNumber(i+1);
             cardSlots[i].setCard(node);
             cardSlots[i].setText(Double.toString(num));
             System.out.println("num is " + num);
@@ -230,8 +281,31 @@ public class GameActivity extends AppCompatActivity {
         for(View v: slotViews){
             v.invalidate();
         }
+    }
+    /*
+    * int ind should be 1 2 3 4 5 or 6.
+     */
+    private CardSlot getCardSlot(int ind){
+        return cardSlots[ind-1];
+    }
 
+    /*
+    * clears the two slots of that card node (so that the new node can be placed into the first cardslot)
+     */
+    private void clearTwoSlots(int slotA, int slotB){
+        getCardSlot(slotA).setCard(null);
+        getCardSlot(slotB).setCard(null);
     }
 
 
+    private void relabel(){
+        for (CardSlot c : cardSlots){
+            if (c.getCard() != null){
+                c.setText(Double.toString(c.getCard().getValue()));
+            } else{
+                c.setText("NULL");
+            }
+
+        }
+    }
 }

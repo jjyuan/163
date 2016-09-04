@@ -16,14 +16,14 @@ import java.util.LinkedList;
 public class CardSlot extends Button {
     private CardNode card;
     private Context context;
-
+    public static int amount = 0;
 
 
     public CardSlot(Context context, AttributeSet attrs){
         super(context, attrs);
         this.context = context;
-
         this.card = null;
+        System.out.println("initializing cardslot " + ++amount);
     }
 
     @Override
@@ -37,13 +37,13 @@ public class CardSlot extends Button {
     @Override
     protected void onDraw(Canvas canvas) {
 
-
         if (card!=null && card.getPosition()!=0){
             System.out.print("redrawing card " + card.getValue() + " to queue ");
             Bitmap bm = queuedBM();
-            canvas.drawBitmap(bm, 10, 40, null);
+            if ( bm!= null) {
+                canvas.drawBitmap(bm, 20, 20, null);
+            }
         }
-
         super.onDraw(canvas);
 
     }

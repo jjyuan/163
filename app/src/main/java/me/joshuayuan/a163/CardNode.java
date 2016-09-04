@@ -14,10 +14,11 @@ public class CardNode {
 
     private CardNode child1; //left
     private CardNode child2; //right
-    private int operation;
+    private int operation; //useful when splitting
     private double value;
 
     private int position;
+    private int cardSlotNumber; //1 2 3 4 5 or 6 represent it's very original slot location.
 
     public CardNode(double value){ //creating card with only a value EX starting the game
         this.child1 = null;
@@ -61,5 +62,21 @@ public class CardNode {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+
+        String s = "CardNode of value: " + this.value + " @ position: " + this.position + " in slot number " + cardSlotNumber;
+        return s;
+
+    }
+
+    public int getCardSlotNumber() {
+        return cardSlotNumber;
+    }
+
+    public void setCardSlotNumber(int cardSlot) {
+        cardSlotNumber = cardSlot;
     }
 }
