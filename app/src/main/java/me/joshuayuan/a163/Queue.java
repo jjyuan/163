@@ -32,13 +32,26 @@ public class Queue {
     }
     /*
     * Decrements all the positions of CardNodes after and including index (not 0-based-ordering) by 1 position.
+    * index is 1 2 3 4 5 6
      */
     private void decrement(int index){
         // index-1 because linkedlist positions are 0, 1, 2, ... but
         // cardnode position is 1, 2, 3,...
         for(int i = index-1; i < q.size(); i++){
-            int curr = q.get(i).getPosition();
-            q.get(i).setPosition(curr-1);
+            CardNode c = q.get(i);
+            int curr = c.getPosition();
+            c.setPosition(curr-1);
+        }
+    }
+    /*
+    * index is 1 2 3 4 5 6
+     */
+    private void increment(int index){
+        for (int i = index-1; i < q.size(); i++){
+            CardNode c = q.get(i);
+            int curr = c.getPosition();
+            c.setPosition(curr + 1);
+            System.out.println("INCREMENTED <<" +c + ">> from " + curr + " to " + curr+1 );
         }
     }
 
@@ -98,7 +111,7 @@ public class Queue {
         }
     }
     /*
-    *
+    * when there's only 1 node left in the queue, empty the node.
      */
     private void resetQueue(){
         for (CardNode c : q){
@@ -106,4 +119,39 @@ public class Queue {
             q.clear();
         }
     }
+
+    /*
+    * splits the first node of the queue into its resulting nodes.
+     */
+    public void splitSmall(CardSlot[] cardSlots){
+        System.out.println("START");
+        CardNode nodeToSplit = q.removeFirst();
+        System.out.println("nodeToSplit: \t" + nodeToSplit);
+        if (nodeToSplit == null){
+            return;
+        }
+        if (nodeToSplit.hasTwoChildren()){
+            nodeToSplit.setPosition(0);
+            CardNode child1 = nodeToSplit.getChild1();
+            System.out.println("child1: \t\t" + child1);
+            CardNode child2 = nodeToSplit.getChild2();
+            System.out.println("child2: \t\t" + child2);
+            int firstSlot = child1.getCardSlotNumber();
+            int secondSlot = child2.getCardSlotNumber();
+
+            cardSlots[firstSlot-1].setCard(child1);
+            cardSlots[secondSlot-1].setCard(child2);
+
+            child1.setPosition(1);
+            child2.setPosition(2);
+            q.addFirst(child2);
+            q.addFirst(child1);
+            increment(3); // increments the second and beyond
+            System.out.println("nodeToSplit: \t" + nodeToSplit);
+            System.out.println("child1: \t\t" + child1);
+            System.out.println("child2: \t\t" + child2);
+            System.out.println("END");
+        }
+    }
+
 }

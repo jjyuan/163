@@ -279,6 +279,14 @@ public class GameActivity extends AppCompatActivity {
 //                    if ( last != null){
 //                        last.printNodeTree();
 //                    }
+                    if (theQ.getSize() >= 1){ // if theres even a queue
+                        theQ.splitSmall(cardSlots);
+                        relabel();
+                        reDrawSlots();
+                    }
+                    System.out.println("*** HERE WE GO ***" + theQ);
+
+
                 }
             });
         }

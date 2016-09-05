@@ -67,7 +67,7 @@ public class CardNode {
     @Override
     public String toString() {
 
-        String s = "CardNode of value: " + this.value + " @ position: " + this.position + " in slot number " + cardSlotNumber;
+        String s = "CardNode of value: " + this.value + " @ Qposition: " + this.position + " in slot number " + cardSlotNumber;
         return s;
 
     }
@@ -91,5 +91,25 @@ public class CardNode {
             System.out.println(cn);
             traverse(cn.child2);
         }
+    }
+
+    public boolean hasTwoChildren(){
+        return child1 != null && child2 != null;
+    }
+
+    public CardNode getChild1() {
+        return child1;
+    }
+
+    public void setChild1(CardNode child1) {
+        this.child1 = child1;
+    }
+
+    public CardNode getChild2() {
+        return child2;
+    }
+
+    public void setChild2(CardNode child2) {
+        this.child2 = child2;
     }
 }
