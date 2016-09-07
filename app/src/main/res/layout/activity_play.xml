@@ -24,7 +24,7 @@
         android:padding="10dp"
         android:width="300dp"
         android:layout_weight="1"
-        android:background="@drawable/rounded_button"/>
+        android:background="@drawable/cardslot"/>
     <Button
         android:id="@+id/practice_mode_button"
         android:layout_gravity="center"
@@ -37,6 +37,6 @@
         android:layout_weight="1"
         android:padding="10dp"
         android:width="300dp"
-        android:background="@drawable/rounded_button"/>
+        android:background="@drawable/cardslot"/>
 
 </LinearLayout>

@@ -125,12 +125,13 @@ public class Queue {
      */
     public void splitSmall(CardSlot[] cardSlots){
         System.out.println("START");
-        CardNode nodeToSplit = q.removeFirst();
+        CardNode nodeToSplit = q.peekFirst();
         System.out.println("nodeToSplit: \t" + nodeToSplit);
         if (nodeToSplit == null){
             return;
         }
         if (nodeToSplit.hasTwoChildren()){
+            q.removeFirst();
             nodeToSplit.setPosition(0);
             CardNode child1 = nodeToSplit.getChild1();
             System.out.println("child1: \t\t" + child1);

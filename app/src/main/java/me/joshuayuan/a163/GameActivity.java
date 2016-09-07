@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -328,7 +329,13 @@ public class GameActivity extends AppCompatActivity {
             CardNode node = new CardNode(num);
             node.setCardSlotNumber(i+1);
             cardSlots[i].setCard(node);
-            cardSlots[i].setText(Double.toString(num));
+
+            String s = Double.toString(num);
+            if ( num%1 == 0){
+                s = String.format("%d", (int) num);
+            }
+
+            cardSlots[i].setText(s);
             System.out.println("num is " + num);
 //            cardSlots[i].setText(Integer.toString(num));
 //            cardSlots[i].setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.card_text_size));
@@ -363,7 +370,12 @@ public class GameActivity extends AppCompatActivity {
     private void relabel(){
         for (CardSlot c : cardSlots){
             if (c.getCard() != null){
-                c.setText(Double.toString(c.getCard().getValue()));
+                double v = c.getCard().getValue();
+                String s = Double.toString(v);
+                if ( v%1 == 0){
+                    s = String.format("%d", (int) v);
+                }
+                c.setText(s);
             } else{
 
                 c.setText("");
@@ -393,18 +405,17 @@ public class GameActivity extends AppCompatActivity {
         if (background!=null){
             background.setBackgroundResource(R.drawable.incomplete);
             TransitionDrawable td = (TransitionDrawable) background.getBackground();
-            td.startTransition(0);
-            td.reverseTransition(1000);
+            td.startTransition(10);
+            td.reverseTransition(500);
         }
-
     }
     private void flashComplete(){
         LinearLayout background = (LinearLayout) findViewById(R.id.father_layout);
         if (background!=null){
             background.setBackgroundResource(R.drawable.complete);
             TransitionDrawable td = (TransitionDrawable) background.getBackground();
-            td.startTransition(0);
-            td.reverseTransition(1000);
+            td.startTransition(10);
+            td.reverseTransition(500);
         }
 
     }
