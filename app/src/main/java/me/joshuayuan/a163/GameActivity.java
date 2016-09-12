@@ -345,6 +345,10 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     private void reDrawSlots(){
         for(View v: slotViews){
@@ -419,4 +423,6 @@ public class GameActivity extends AppCompatActivity {
         }
 
     }
+
+
 }
