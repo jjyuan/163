@@ -36,7 +36,7 @@ public class CardSlot extends Button {
     protected void onDraw(Canvas canvas) {
 
         if (card!=null && card.getPosition()!=0){
-            System.out.print("redrawing card " + card.getValue() + " to queue ");
+//            System.out.print("redrawing card " + card.getValue() + " to queue ");
             Bitmap bm = queuedBM();
             if ( bm!= null) {
                 canvas.drawBitmap(bm, 20, 20, null);
@@ -49,8 +49,12 @@ public class CardSlot extends Button {
     @Override
     public void setText(CharSequence text, BufferType type) {
 
+        System.out.println(text + " is the string and it is " + text.length() +" long");
+        if ( text.length() > 6) {
+            text = text.subSequence(0, 6) + "...";
+        }
         super.setText(text, type);
-        System.out.println("text is " + text.toString());
+//        System.out.println("text is " + text.toString());
     }
 
     public CardNode getCard() {

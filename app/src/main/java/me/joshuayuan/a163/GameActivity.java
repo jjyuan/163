@@ -1,23 +1,14 @@
 package me.joshuayuan.a163;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.media.Image;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.text.DecimalFormat;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
@@ -58,7 +49,7 @@ public class GameActivity extends AppCompatActivity {
         gameMode = intent.getBooleanExtra("gameMode", PRACTICE_MODE);
 
         slotViews[0] = findViewById(R.id.card_slot_1);
-        cardSlot1 = (CardSlot) findViewById(R.id.card_slot_1);
+        cardSlot1 = (CardSlot) slotViews[0];
         if(cardSlot1!=null){
 
             cardSlot1.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
         slotViews[1] = findViewById(R.id.card_slot_2);
-        cardSlot2 = (CardSlot) findViewById(R.id.card_slot_2);
+        cardSlot2 = (CardSlot) slotViews[1];
         if(cardSlot2!=null){
 
             cardSlot2.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +93,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
         slotViews[2] = findViewById(R.id.card_slot_3);
-        cardSlot3 = (CardSlot) findViewById(R.id.card_slot_3);
+        cardSlot3 = (CardSlot) slotViews[2];
         if(cardSlot3!=null){
 
             cardSlot3.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +115,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
         slotViews[3] = findViewById(R.id.card_slot_4);
-        cardSlot4 = (CardSlot) findViewById(R.id.card_slot_4);
+        cardSlot4 = (CardSlot) slotViews[3];
         if(cardSlot4!=null){
 
             cardSlot4.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
         slotViews[4] = findViewById(R.id.card_slot_5);
-        cardSlot5 = (CardSlot) findViewById(R.id.card_slot_5);
+        cardSlot5 = (CardSlot) slotViews[4];
         if(cardSlot5!=null){
 
             cardSlot5.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +159,7 @@ public class GameActivity extends AppCompatActivity {
             });
         }
         slotViews[5] = findViewById(R.id.card_slot_6);
-        cardSlot6 = (CardSlot) findViewById(R.id.card_slot_6);
+        cardSlot6 = (CardSlot) slotViews[5];
         if(cardSlot6!=null){
 
             cardSlot6.setOnClickListener(new View.OnClickListener() {
@@ -298,11 +289,39 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (getLastNode()!=null && getLastNode().getValue() == 163) {
-                        flashComplete();
+                        flash(0);
                         newCards();
                         reDrawSlots();
                     } else {
-                        flashIncomplete();
+                        flash(1);
+                    }
+                }
+            });
+            submitButton.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    switch(motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            return true;
+                        case MotionEvent.ACTION_UP:
+                            Long timing = motionEvent.getEventTime() - motionEvent.getDownTime();
+                            System.out.println("TIME RELAPSED: " + timing);
+                            if ( timing > 500) {
+                                flash(2);
+                                newCards();
+                                reDrawSlots();
+                            } else {
+                                if (getLastNode()!=null && getLastNode().getValue() == 163) {
+                                    flash(0);
+                                    newCards();
+                                    reDrawSlots();
+                                } else {
+                                    flash(1);
+                                }
+                            }
+                            return false;
+                        default:
+                            return true;
                     }
                 }
             });
@@ -332,7 +351,7 @@ public class GameActivity extends AppCompatActivity {
 
             String s = Double.toString(num);
             if ( num%1 == 0){
-                s = String.format("%d", (int) num);
+                s = Integer.toString((int) num);
             }
 
             cardSlots[i].setText(s);
@@ -404,25 +423,29 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void flashIncomplete(){
+
+    private void flash(int option){
         LinearLayout background = (LinearLayout) findViewById(R.id.father_layout);
-        if (background!=null){
-            background.setBackgroundResource(R.drawable.incomplete);
+        if (background!= null){
+
+            switch (option){
+
+                case 0:
+                    background.setBackgroundResource(R.drawable.complete);
+                    break;
+                case 1:
+                    background.setBackgroundResource(R.drawable.incomplete);
+                    break;
+                case 2:
+                    background.setBackgroundResource(R.drawable.refresh);
+                    break;
+                default:
+                    break;
+            }
             TransitionDrawable td = (TransitionDrawable) background.getBackground();
             td.startTransition(10);
             td.reverseTransition(500);
         }
     }
-    private void flashComplete(){
-        LinearLayout background = (LinearLayout) findViewById(R.id.father_layout);
-        if (background!=null){
-            background.setBackgroundResource(R.drawable.complete);
-            TransitionDrawable td = (TransitionDrawable) background.getBackground();
-            td.startTransition(10);
-            td.reverseTransition(500);
-        }
-
-    }
-
 
 }
