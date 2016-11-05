@@ -27,6 +27,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/cardslot"
             android:textColor="@color/Black"
+            android:textSize="@dimen/card_text_size"
             android:fontFamily="OpenSans-Regular"
             android:layout_margin="5dp"
             android:layout_weight="1"
@@ -37,6 +38,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/cardslot"
             android:textColor="@color/Black"
+            android:textSize="@dimen/card_text_size"
             android:fontFamily="OpenSans-Regular"
             android:layout_margin="5dp"
             android:layout_weight="1"/>
@@ -46,6 +48,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/cardslot"
             android:textColor="@color/Black"
+            android:textSize="@dimen/card_text_size"
             android:fontFamily="OpenSans-Regular"
             android:layout_margin="5dp"
             android:layout_weight="1"/>
@@ -64,8 +67,11 @@
             android:layout_height="match_parent"
             android:background="@drawable/cardslot"
             android:textColor="@color/Black"
+            android:textSize="@dimen/card_text_size"
             android:fontFamily="OpenSans-Regular"
+            android:padding="0dp"
             android:layout_margin="5dp"
+            android:text="123.56"
             android:layout_weight="1"/>
         <me.joshuayuan.a163.CardSlot
             android:id="@+id/card_slot_5"
@@ -73,6 +79,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/cardslot"
             android:textColor="@color/Black"
+            android:textSize="@dimen/card_text_size"
             android:fontFamily="OpenSans-Regular"
             android:layout_margin="5dp"
             android:layout_weight="1"/>
@@ -82,6 +89,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/cardslot"
             android:textColor="@color/Black"
+            android:textSize="@dimen/card_text_size"
             android:fontFamily="OpenSans-Regular"
             android:layout_margin="5dp"
             android:layout_weight="1"/>

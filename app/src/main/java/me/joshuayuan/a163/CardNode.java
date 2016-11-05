@@ -1,10 +1,13 @@
 package me.joshuayuan.a163;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by JoshuaYuan on 8/19/2016.
  * CardNode should never be empty. Always needs a value.
  */
-public class CardNode {
+public class CardNode implements Parcelable{
 
     private final int NOOP = 0;
     private final int PLUS = 1;
@@ -111,5 +114,34 @@ public class CardNode {
 
     public void setChild2(CardNode child2) {
         this.child2 = child2;
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+    public void writeToParcel(Parcel out, int flags){
+        out.writeDouble(value);
+        out.writeInt(position);
+        out.writeInt(operation);
+        out.writeInt(cardSlotNumber);
+        out.writeParcelable(child1, 0);
+        out.writeParcelable(child2, 0);
+    }
+    public static final Parcelable.Creator<CardNode> CREATOR = new Parcelable.Creator<CardNode>() {
+        public CardNode createFromParcel(Parcel in){
+            return new CardNode(in);
+        }
+        public CardNode[] newArray(int size){
+            return new CardNode[size];
+        }
+    };
+
+    private CardNode(Parcel in){
+        value = in.readDouble();
+        position = in.readInt();
+        operation = in.readInt();
+        cardSlotNumber = in.readInt();
+        child1 = in.readParcelable(CardNode.class.getClassLoader());
+        child2 = in.readParcelable(CardNode.class.getClassLoader());
     }
 }

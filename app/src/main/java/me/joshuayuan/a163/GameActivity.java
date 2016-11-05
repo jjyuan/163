@@ -2,6 +2,7 @@ package me.joshuayuan.a163;
 
 import android.content.Intent;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -45,6 +46,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+
         Intent intent = getIntent();
         gameMode = intent.getBooleanExtra("gameMode", PRACTICE_MODE);
 
@@ -310,11 +313,15 @@ public class GameActivity extends AppCompatActivity {
                                 flash(2);
                                 newCards();
                                 reDrawSlots();
+                                theQ.resetQueue();
+
                             } else {
                                 if (getLastNode()!=null && getLastNode().getValue() == 163) {
                                     flash(0);
                                     newCards();
                                     reDrawSlots();
+                                    theQ.resetQueue();
+
                                 } else {
                                     flash(1);
                                 }
@@ -366,7 +373,20 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        for (int i = 0; i < cardSlots.length; i++) {
+            outState.putParcelable("cardslot" + (i+1), cardSlots[i].getCard());
+        }
+        outState.putParcelable("q", theQ);
         super.onSaveInstanceState(outState);
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        for (int i = 0; i < cardSlots.length; i++){
+            cardSlots[i].setCard( (CardNode) savedInstanceState.getParcelable("cardslot" +(i+1)));
+        }
+        theQ = savedInstanceState.getParcelable("q");
+        System.out.println("HERE WE GO BOYS");
     }
 
     private void reDrawSlots(){
@@ -374,6 +394,7 @@ public class GameActivity extends AppCompatActivity {
             v.invalidate();
         }
     }
+
     /*
     * int ind should be 1 2 3 4 5 or 6.
      */

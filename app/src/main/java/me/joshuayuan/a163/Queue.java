@@ -1,11 +1,14 @@
 package me.joshuayuan.a163;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.LinkedList;
 
 /**
  * Created by JoshuaYuan on 8/22/2016.
  */
-public class Queue {
+public class Queue implements Parcelable {
 
     private static LinkedList<CardNode> q;
     public Queue(){
@@ -113,7 +116,7 @@ public class Queue {
     /*
     * when there's only 1 node left in the queue, empty the node.
      */
-    private void resetQueue(){
+    public void resetQueue(){
         for (CardNode c : q){
             c.setPosition(0);
             q.clear();
@@ -154,5 +157,22 @@ public class Queue {
             System.out.println("END");
         }
     }
+    public int describeContents(){
+        return 0;
+    }
+    public void writeToParcel(Parcel out, int flags){
+        out.writeValue(q);
+    }
+    public static final Parcelable.Creator<Queue> CREATOR = new Parcelable.Creator<Queue>() {
+        public Queue createFromParcel(Parcel in){
+            return new Queue(in);
+        }
+        public Queue[] newArray(int size){
+            return new Queue[size];
+        }
+    };
 
+    private Queue(Parcel in) {
+        q = (LinkedList<CardNode>) in.readValue(Queue.class.getClassLoader());
+    }
 }

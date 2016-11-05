@@ -4,7 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,7 +17,7 @@ import java.util.LinkedList;
 /**
  * Created by JoshuaYuan on 8/17/2016.
  */
-public class CardSlot extends Button {
+public class CardSlot extends Button{
     private CardNode card;
     private Context context;
 
@@ -39,7 +43,7 @@ public class CardSlot extends Button {
 //            System.out.print("redrawing card " + card.getValue() + " to queue ");
             Bitmap bm = queuedBM();
             if ( bm!= null) {
-                canvas.drawBitmap(bm, 20, 20, null);
+                canvas.drawBitmap(bm, 15, 15, null);
             }
         }
         super.onDraw(canvas);
@@ -51,7 +55,7 @@ public class CardSlot extends Button {
 
         System.out.println(text + " is the string and it is " + text.length() +" long");
         if ( text.length() > 6) {
-            text = text.subSequence(0, 6) + "...";
+            text = text.subSequence(0, 5) + "...";
         }
         super.setText(text, type);
 //        System.out.println("text is " + text.toString());
@@ -85,4 +89,47 @@ public class CardSlot extends Button {
                 return null;
         }
     }
+    /*
+    public int describeContents(){
+        return 0;
+    }
+    public void writeToParcel(Parcel out, int flags){
+        out.writeParcelable(card, 0);
+        out.writeValue(context);
+    }
+    public static final Parcelable.Creator<CardSlot> CREATOR = new Parcelable.Creator<CardSlot>() {
+        public CardSlot createFromParcel(Parcel in){
+            return new CardSlot(in);
+        }
+        public CardSlot[] newArray(int size){
+            return new CardSlot[size];
+        }
+    };
+
+    protected CardSlot(Parcel in){
+        card = in.readParcelable(CardNode.class.getClassLoader());
+        context = (Context) in.readValue(Context.class.getClassLoader());
+    }
+*/
+    /*@Override
+    public Parcelable onSaveInstanceState(){
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("superState", super.onSaveInstanceState());
+        bundle.putParcelable("cardnode", this.card); // ... save stuff
+        context = getContext();
+        return bundle;
+    }
+    @Override
+    public void onRestoreInstanceState(Parcelable state){
+        if (state instanceof Bundle) // implicit null check
+        {
+            Bundle bundle = (Bundle) state;
+            this.card = bundle.getParcelable("cardnode"); // ... load stuff
+            state = bundle.getParcelable("superState");
+        }
+        super.onRestoreInstanceState(state);
+
+    }*/
+
+
 }
