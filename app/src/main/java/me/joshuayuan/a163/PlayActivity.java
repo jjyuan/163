@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class PlayActivity extends AppCompatActivity {
-    private final boolean PRACTICE_MODE = true;
-    private final boolean SPEED_MODE = false;
+    private static final boolean PRACTICE_MODE = true;
+    private static final boolean SPEED_MODE = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

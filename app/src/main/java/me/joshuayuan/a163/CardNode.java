@@ -5,40 +5,40 @@ import android.os.Parcelable;
 
 /**
  * Created by JoshuaYuan on 8/19/2016.
- * CardNode should never be empty. Always needs a value.
+ * CardNode should never be empty. Always needs a mValue.
  */
 public class CardNode implements Parcelable{
 
-    private final int NOOP = 0;
-    private final int PLUS = 1;
-    private final int SUB = 2;
-    private final int MULT = 3;
-    private final int DIV = 4;
+    public static final int NOOP = 0;
+    public static final int PLUS = 1;
+    public static final int SUB = 2;
+    public static final int MULT = 3;
+    public static final int DIV = 4;
 
-    private CardNode child1; //left
-    private CardNode child2; //right
-    private int operation; //useful when splitting
-    private double value;
+    private CardNode mChild1; //left
+    private CardNode mChild2; //right
+    private int mOperation; //useful when splitting
+    private double mValue;
 
     private int position;
     private int cardSlotNumber; //1 2 3 4 5 or 6 represent it's very original slot location.
 
-    public CardNode(double value){ //creating card with only a value EX starting the game
-        this.child1 = null;
-        this.child2 = null;
-        this.value = value;
-        this.operation = NOOP;
+    public CardNode(double value){ //creating card with only a mValue EX starting the game
+        this.mChild1 = null;
+        this.mChild2 = null;
+        this.mValue = value;
+        this.mOperation = NOOP;
     }
-    public CardNode(CardNode a, CardNode b, int operation){ //creating a new cardnode from 2 w/ operation
-        this.child1 = a;
-        this.child2 = b;
-        this.value = eval(a.getValue(), b.getValue(), operation);
-        this.operation = operation;
+    public CardNode(CardNode a, CardNode b, int operation){ //creating a new cardnode from 2 w/ mOperation
+        this.mChild1 = a;
+        this.mChild2 = b;
+        this.mValue = eval(a.getmValue(), b.getmValue(), operation);
+        this.mOperation = operation;
 
     }
 
-    public double getValue(){
-        return this.value;
+    public double getmValue(){
+        return this.mValue;
     }
 
     private double eval(double aVal, double bVal, int operation){
@@ -55,7 +55,7 @@ public class CardNode implements Parcelable{
                 }
                 return aVal/bVal;
             default:
-                return this.value;
+                return this.mValue;
         }
     }
 
@@ -70,7 +70,7 @@ public class CardNode implements Parcelable{
     @Override
     public String toString() {
 
-        String s = "CardNode of value: " + this.value + " @ Qposition: " + this.position + " in slot number " + cardSlotNumber;
+        String s = "CardNode of mValue: " + this.mValue + " @ Qposition: " + this.position + " in slot number " + cardSlotNumber;
         return s;
 
     }
@@ -90,42 +90,42 @@ public class CardNode implements Parcelable{
         if (cn == null){
             return;
         } else{
-            traverse(cn.child1);
+            traverse(cn.mChild1);
             System.out.println(cn);
-            traverse(cn.child2);
+            traverse(cn.mChild2);
         }
     }
 
     public boolean hasTwoChildren(){
-        return child1 != null && child2 != null;
+        return mChild1 != null && mChild2 != null;
     }
 
-    public CardNode getChild1() {
-        return child1;
+    public CardNode getmChild1() {
+        return mChild1;
     }
 
-    public void setChild1(CardNode child1) {
-        this.child1 = child1;
+    public void setmChild1(CardNode mChild1) {
+        this.mChild1 = mChild1;
     }
 
-    public CardNode getChild2() {
-        return child2;
+    public CardNode getmChild2() {
+        return mChild2;
     }
 
-    public void setChild2(CardNode child2) {
-        this.child2 = child2;
+    public void setmChild2(CardNode mChild2) {
+        this.mChild2 = mChild2;
     }
 
     public int describeContents(){
         return 0;
     }
     public void writeToParcel(Parcel out, int flags){
-        out.writeDouble(value);
+        out.writeDouble(mValue);
         out.writeInt(position);
-        out.writeInt(operation);
+        out.writeInt(mOperation);
         out.writeInt(cardSlotNumber);
-        out.writeParcelable(child1, 0);
-        out.writeParcelable(child2, 0);
+        out.writeParcelable(mChild1, 0);
+        out.writeParcelable(mChild2, 0);
     }
     public static final Parcelable.Creator<CardNode> CREATOR = new Parcelable.Creator<CardNode>() {
         public CardNode createFromParcel(Parcel in){
@@ -137,11 +137,11 @@ public class CardNode implements Parcelable{
     };
 
     private CardNode(Parcel in){
-        value = in.readDouble();
+        mValue = in.readDouble();
         position = in.readInt();
-        operation = in.readInt();
+        mOperation = in.readInt();
         cardSlotNumber = in.readInt();
-        child1 = in.readParcelable(CardNode.class.getClassLoader());
-        child2 = in.readParcelable(CardNode.class.getClassLoader());
+        mChild1 = in.readParcelable(CardNode.class.getClassLoader());
+        mChild2 = in.readParcelable(CardNode.class.getClassLoader());
     }
 }
