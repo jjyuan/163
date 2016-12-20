@@ -32,7 +32,7 @@ public class CardSlot extends Button{
     @Override
     protected void onDraw(Canvas canvas) {
 
-        if (mCard !=null && mCard.getPosition()!=0){
+        if (mCard !=null && mCard.getmPosition()!=0){
 //            System.out.print("redrawing mCard " + mCard.getmValue() + " to queue ");
             Bitmap bm = queuedBM();
             if ( bm!= null) {
@@ -63,7 +63,7 @@ public class CardSlot extends Button{
     }
 
     private Bitmap queuedBM(){
-        int p = this.mCard.getPosition();
+        int p = this.mCard.getmPosition();
         System.out.println(p);
         switch (p){
             case 1:

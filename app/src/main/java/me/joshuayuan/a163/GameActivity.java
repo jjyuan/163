@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameActivity extends AppCompatActivity {
     private final boolean PRACTICE_MODE = true;
@@ -29,6 +29,8 @@ public class GameActivity extends AppCompatActivity {
 
     private Queue mTheQ;
     private Deck mDeck;
+    private Timer mTimer;
+    private int mScore;
 
     private Button mOpPLUS;
     private Button mOpSUB;
@@ -50,8 +52,18 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-        Intent intent = getIntent();
-        gameMode = intent.getBooleanExtra("gameMode", PRACTICE_MODE);
+        mScore = 0;
+
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(GameActivity.this, ScoreScreenActivity.class);
+                System.out.println("game: " + mScore);
+                intent.putExtra("mScore", mScore);
+                startActivity(intent);
+            }
+        }, 60000);
 
         mSlotViews[0] = findViewById(R.id.card_slot_1);
         mCardSlot1 = (CardSlot) mSlotViews[0];
@@ -64,7 +76,7 @@ public class GameActivity extends AppCompatActivity {
                     if (c == null){
                         return;
                     }
-                    if (c.getPosition() == 0){
+                    if (c.getmPosition() == 0){
                         mTheQ.add(c);
                     } else {
                         mTheQ.remove(c);
@@ -86,7 +98,7 @@ public class GameActivity extends AppCompatActivity {
                     if (c == null){
                         return;
                     }
-                    if (c.getPosition() == 0){
+                    if (c.getmPosition() == 0){
                         mTheQ.add(c);
                     } else {
                         mTheQ.remove(c);
@@ -108,7 +120,7 @@ public class GameActivity extends AppCompatActivity {
                     if (c == null){
                         return;
                     }
-                    if (c.getPosition() == 0){
+                    if (c.getmPosition() == 0){
                         mTheQ.add(c);
                     } else {
                         mTheQ.remove(c);
@@ -130,7 +142,7 @@ public class GameActivity extends AppCompatActivity {
                     if (c == null){
                         return;
                     }
-                    if (c.getPosition() == 0){
+                    if (c.getmPosition() == 0){
                         mTheQ.add(c);
                     } else {
                         mTheQ.remove(c);
@@ -152,7 +164,7 @@ public class GameActivity extends AppCompatActivity {
                     if (c == null){
                         return;
                     }
-                    if (c.getPosition() == 0){
+                    if (c.getmPosition() == 0){
                         mTheQ.add(c);
                     } else {
                         mTheQ.remove(c);
@@ -174,7 +186,7 @@ public class GameActivity extends AppCompatActivity {
                     if (c == null){
                         return;
                     }
-                    if (c.getPosition() == 0){
+                    if (c.getmPosition() == 0){
                         mTheQ.add(c);
                     } else {
                         mTheQ.remove(c);
@@ -290,18 +302,7 @@ public class GameActivity extends AppCompatActivity {
 
         mSubmitButton = (Button) findViewById(R.id.submit_button);
         if (mSubmitButton != null){
-            mSubmitButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (getLastNode()!=null && getLastNode().getmValue() == 163) {
-                        flash(0);
-                        newCards();
-                        reDrawSlots();
-                    } else {
-                        flash(1);
-                    }
-                }
-            });
+
             mSubmitButton.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -319,6 +320,7 @@ public class GameActivity extends AppCompatActivity {
 
                             } else {
                                 if (getLastNode()!=null && getLastNode().getmValue() == 163) {
+                                    mScore++;
                                     flash(0);
                                     newCards();
                                     reDrawSlots();

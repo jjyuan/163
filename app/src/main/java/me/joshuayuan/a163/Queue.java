@@ -21,7 +21,7 @@ public class Queue implements Parcelable {
      */
     public void add(CardNode c){
         sQ.add(c);
-        c.setPosition(sQ.size());
+        c.setmPosition(sQ.size());
     }
     /*
     * Remove a CardNode from the queue, decrement the position of those behind it by 1, and set its
@@ -29,9 +29,9 @@ public class Queue implements Parcelable {
      */
     public void remove(CardNode c){
         sQ.remove(c);
-        int index = c.getPosition();
+        int index = c.getmPosition();
         decrement(index);
-        c.setPosition(0);
+        c.setmPosition(0);
     }
     /*
     * Decrements all the positions of CardNodes after and including index (not 0-based-ordering) by 1 position.
@@ -42,8 +42,8 @@ public class Queue implements Parcelable {
         // cardnode position is 1, 2, 3,...
         for(int i = index-1; i < sQ.size(); i++){
             CardNode c = sQ.get(i);
-            int curr = c.getPosition();
-            c.setPosition(curr-1);
+            int curr = c.getmPosition();
+            c.setmPosition(curr-1);
         }
     }
     /*
@@ -52,8 +52,8 @@ public class Queue implements Parcelable {
     private void increment(int index){
         for (int i = index-1; i < sQ.size(); i++){
             CardNode c = sQ.get(i);
-            int curr = c.getPosition();
-            c.setPosition(curr + 1);
+            int curr = c.getmPosition();
+            c.setmPosition(curr + 1);
             System.out.println("INCREMENTED <<" +c + ">> from " + curr + " to " + curr+1 );
         }
     }
@@ -64,13 +64,13 @@ public class Queue implements Parcelable {
      */
     public CardNode operate(int operation){
         CardNode firstInQ = sQ.poll();
-        firstInQ.setPosition(0);
+        firstInQ.setmPosition(0);
         int origCardSlot = firstInQ.getCardSlotNumber();
         CardNode secondInQ = sQ.poll();
-        secondInQ.setPosition(0);
+        secondInQ.setmPosition(0);
 
         CardNode newNode = new CardNode(firstInQ,secondInQ, operation);
-        newNode.setPosition(1);
+        newNode.setmPosition(1);
         newNode.setCardSlotNumber(origCardSlot);
 
         sQ.addFirst(newNode);
@@ -118,7 +118,7 @@ public class Queue implements Parcelable {
      */
     public void resetQueue(){
         for (CardNode c : sQ){
-            c.setPosition(0);
+            c.setmPosition(0);
             sQ.clear();
         }
     }
@@ -135,7 +135,7 @@ public class Queue implements Parcelable {
         }
         if (nodeToSplit.hasTwoChildren()){
             sQ.removeFirst();
-            nodeToSplit.setPosition(0);
+            nodeToSplit.setmPosition(0);
             CardNode child1 = nodeToSplit.getmChild1();
             System.out.println("child1: \t\t" + child1);
             CardNode child2 = nodeToSplit.getmChild2();
@@ -146,8 +146,8 @@ public class Queue implements Parcelable {
             cardSlots[firstSlot-1].setmCard(child1);
             cardSlots[secondSlot-1].setmCard(child2);
 
-            child1.setPosition(1);
-            child2.setPosition(2);
+            child1.setmPosition(1);
+            child2.setmPosition(2);
             sQ.addFirst(child2);
             sQ.addFirst(child1);
             increment(3); // increments the second and beyond

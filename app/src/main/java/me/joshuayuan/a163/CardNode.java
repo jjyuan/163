@@ -20,7 +20,7 @@ public class CardNode implements Parcelable{
     private int mOperation; //useful when splitting
     private double mValue;
 
-    private int position;
+    private int mPosition;
     private int cardSlotNumber; //1 2 3 4 5 or 6 represent it's very original slot location.
 
     public CardNode(double value){ //creating card with only a mValue EX starting the game
@@ -59,18 +59,18 @@ public class CardNode implements Parcelable{
         }
     }
 
-    public int getPosition() {
-        return position;
+    public int getmPosition() {
+        return mPosition;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setmPosition(int mPosition) {
+        this.mPosition = mPosition;
     }
 
     @Override
     public String toString() {
 
-        String s = "CardNode of mValue: " + this.mValue + " @ Qposition: " + this.position + " in slot number " + cardSlotNumber;
+        String s = "CardNode of mValue: " + this.mValue + " @ Qposition: " + this.mPosition + " in slot number " + cardSlotNumber;
         return s;
 
     }
@@ -121,7 +121,7 @@ public class CardNode implements Parcelable{
     }
     public void writeToParcel(Parcel out, int flags){
         out.writeDouble(mValue);
-        out.writeInt(position);
+        out.writeInt(mPosition);
         out.writeInt(mOperation);
         out.writeInt(cardSlotNumber);
         out.writeParcelable(mChild1, 0);
@@ -138,7 +138,7 @@ public class CardNode implements Parcelable{
 
     private CardNode(Parcel in){
         mValue = in.readDouble();
-        position = in.readInt();
+        mPosition = in.readInt();
         mOperation = in.readInt();
         cardSlotNumber = in.readInt();
         mChild1 = in.readParcelable(CardNode.class.getClassLoader());

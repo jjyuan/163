@@ -120,7 +120,7 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/submit_button"
-            android:text="@string/submit_buttom_text"
+            android:text="@string/submit_button_text"
             android:fontFamily="OpenSans-Regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
