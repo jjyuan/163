@@ -7,36 +7,103 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="horizontal"
     android:background="@color/FloralWhite"
-    android:weightSum="2"
-    tools:context="me.joshuayuan.a163.PlayActivity">
+    android:orientation="vertical"
+    android:weightSum="3"
+    tools:context="me.joshuayuan.a163.PlayActivity"
+    >
 
-    <Button
-        android:id="@+id/speed_mode_button"
-        android:layout_gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:text="@string/speed_mode"
-        android:textSize="@dimen/regular_text_size"
-        android:fontFamily="OpenSans-Regular"
-        android:layout_margin="30dp"
-        android:padding="10dp"
-        android:width="300dp"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@drawable/cardslot"/>
-    <Button
-        android:id="@+id/practice_mode_button"
-        android:layout_gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:text="@string/practice_mode"
-        android:textSize="@dimen/regular_text_size"
+        android:textSize="50sp"
+        android:text="@string/choose_mode_text"
+        android:textColor="@color/Black"
+        android:background="@color/WhiteSmoke"
+        android:padding="20dp"
         android:fontFamily="OpenSans-Regular"
-        android:layout_margin="30dp"
-        android:layout_weight="1"
-        android:padding="10dp"
-        android:width="300dp"
-        android:background="@drawable/cardslot"/>
+        android:gravity="center"
+        />
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:layout_weight="2"
+        >
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+            <Button
+                android:id="@+id/play_one_minute"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/cardslot"
+                android:layout_margin="5dp"
+                android:text="@string/play_1_min"
+                android:textColor="@color/Black"
+                android:textSize="30sp"
+                android:fontFamily="OpenSans-Regular"
+                android:textAllCaps="false"
+                />
+            <Button
+                android:id="@+id/play_two_minutes"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/cardslot"
+                android:layout_margin="5dp"
+                android:text="@string/play_2_min"
+                android:textColor="@color/Black"
+                android:textSize="30sp"
+                android:fontFamily="OpenSans-Regular"
+                android:textAllCaps="false"
+                />
+            <Button
+                android:id="@+id/play_five_minutes"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/cardslot"
+                android:layout_margin="5dp"
+                android:text="@string/play_5_min"
+                android:textColor="@color/Black"
+                android:textSize="30sp"
+                android:fontFamily="OpenSans-Regular"
+                android:textAllCaps="false"
+                />
+
+        </TableRow>
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/play_customize"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/cardslot"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:hint="@string/play_custom"
+                android:textColorHint="@color/SlateGray"
+                android:textSize="30sp"
+                android:fontFamily="OpenSans-Regular"
+                />
+            <Button
+                android:id="@+id/play_endless"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/cardslot"
+                android:layout_margin="5dp"
+                android:text="@string/play_endless"
+                android:textColor="@color/Black"
+                android:textSize="30sp"
+                android:fontFamily="OpenSans-Regular"
+                android:textAllCaps="false"
+                />
+
+        </TableRow>
+
+    </TableLayout>
 
 </LinearLayout>

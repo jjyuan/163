@@ -15,6 +15,14 @@
     <string name="split_button_text">[ -/- ]</string>
     <string name="submit_button_text">=</string>
     <string name="return_button_text">return home</string>
+    <string name="choose_mode_text">choose your mode:</string>
+
+    <string name="play_1_min">1 minute</string>
+    <string name="play_2_min">2 minutes</string>
+    <string name="play_5_min">5 minutes</string>
+    <string name="play_custom">custom:</string>
+    <string name="play_endless">endless</string>
+
 
 
     <!-- Strings related to Settings -->

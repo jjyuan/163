@@ -1,11 +1,15 @@
 package me.joshuayuan.a163;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +22,7 @@ public class ScoreScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score_screen);
         int score = 0;
         Intent intent = getIntent();
-        score = intent.getIntExtra("mScore", 100);
+        score = intent.getIntExtra("mScore", score);
         System.out.println(score);
 
         TextView mTV = (TextView) findViewById(R.id.score_text);
@@ -40,10 +44,17 @@ public class ScoreScreenActivity extends AppCompatActivity {
                     startActivity(returnIntent);
                 }
             });
-
-
         }
 
-
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.e("back",""+1);
+            Intent i=new Intent(ScoreScreenActivity.this,PlayActivity.class);
+            startActivity(i);
+            finish();
+        }
+        return true;
     }
 }

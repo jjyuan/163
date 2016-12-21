@@ -53,17 +53,23 @@ public class GameActivity extends AppCompatActivity {
 
 
         mScore = 0;
+        int timeLimit = 0;
+        Intent prevIntent = getIntent();
+        timeLimit = prevIntent.getIntExtra("time", timeLimit);
+        System.out.println("RECEIVED TIME: \t" + timeLimit);
 
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(GameActivity.this, ScoreScreenActivity.class);
-                System.out.println("game: " + mScore);
-                intent.putExtra("mScore", mScore);
-                startActivity(intent);
-            }
-        }, 60000);
+        if (timeLimit != 0) {
+            mTimer = new Timer();
+            mTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(GameActivity.this, ScoreScreenActivity.class);
+                    System.out.println("game: " + mScore);
+                    intent.putExtra("mScore", mScore);
+                    startActivity(intent);
+                }
+            }, timeLimit);
+        }
 
         mSlotViews[0] = findViewById(R.id.card_slot_1);
         mCardSlot1 = (CardSlot) mSlotViews[0];
