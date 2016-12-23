@@ -22,9 +22,10 @@
             android:name=".PlayActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".ScoreScreenActivity"
+        <activity
+            android:name=".ScoreScreenActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -33,12 +34,9 @@
             android:name=".GameActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-            <!--android:parentActivityName=".PlayActivity">-->
-            <!--<meta-data-->
-                <!--android:name=".PARENT_ACTIVITY"-->
-                <!--android:value=".PlayActivity"-->
-                <!--/>-->
-        <!--</activity>-->
+        <activity android:name=".ReadMeActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package me.joshuayuan.a163;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,6 +29,7 @@ public class PlayActivity extends AppCompatActivity {
                     Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                     intent.putExtra("time", ONE_MINUTE);
                     startActivity(intent);
+                    finish();
                 }
             });
 
@@ -40,6 +42,7 @@ public class PlayActivity extends AppCompatActivity {
                     Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                     intent.putExtra("time", TWO_MINUTES);
                     startActivity(intent);
+                    finish();
                 }
             });
 
@@ -52,6 +55,7 @@ public class PlayActivity extends AppCompatActivity {
                     Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                     intent.putExtra("time", FIVE_MINUTES);
                     startActivity(intent);
+                    finish();
                 }
             });
         }
@@ -62,12 +66,18 @@ public class PlayActivity extends AppCompatActivity {
                 public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                     boolean handled = false;
                     if (i == EditorInfo.IME_ACTION_DONE) {
-                        Intent intent = new Intent(PlayActivity.this, GameActivity.class);
-                        System.out.println("CUSTOM INPUT: \t" + textView.getText().toString());
-                        double minutes = Double.parseDouble(mCustom.getText().toString());
-                        System.out.println("CUSTOMINPUT TWO: \t" + minutes);
-                        intent.putExtra("time", (int) (minutes * 1000.0 * 60.0));
-                        startActivity(intent);
+                        String inputText = mCustom.getText().toString();
+                        if (inputText.isEmpty() || inputText.length() == 0 || inputText.equals("") || inputText == null){
+
+                        } else {
+                            Intent intent = new Intent(PlayActivity.this, GameActivity.class);
+                            System.out.println("CUSTOM INPUT: \t" + textView.getText().toString());
+                            double minutes = Double.parseDouble(inputText);
+                            System.out.println("CUSTOMINPUT TWO: \t" + minutes);
+                            intent.putExtra("time", (int) (minutes * 1000.0 * 60.0));
+                            startActivity(intent);
+                            finish();
+                        }
 
                         handled = true;
                     }
@@ -83,8 +93,26 @@ public class PlayActivity extends AppCompatActivity {
                     Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                     intent.putExtra("time", 0);
                     startActivity(intent);
+                    finish();
                 }
             });
         }
+    }
+    @Override
+    public void onBackPressed(){
+        System.out.println("this isn't printed either");
+        // AlertDialog happens here
+    }
+    // Copy & Pasted from another StackOverFlow (http://stackoverflow.com/questions/16646301/onbackpressed-is-not-being-called)
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        System.out.println("PLAYACTIVITY: onKeyDown~~~~");
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.d("back", "should go back to MainActivity");
+            Intent i=new Intent(PlayActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+        return true;
     }
 }

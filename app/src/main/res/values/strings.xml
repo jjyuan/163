@@ -2,6 +2,7 @@
     <string name="app_name">163</string>
     <string name="play">play</string>
     <string name="stats">stats</string>
+    <string name="readme">readme.txt</string>
     <string name="settings">settings</string>
     <string name="speed_mode">Speed Mode</string>
     <string name="practice_mode">Practice Mode</string>
@@ -22,7 +23,6 @@
     <string name="play_5_min">5 minutes</string>
     <string name="play_custom">custom:</string>
     <string name="play_endless">endless</string>
-
 
 
     <!-- Strings related to Settings -->

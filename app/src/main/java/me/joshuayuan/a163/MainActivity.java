@@ -20,15 +20,16 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, PlayActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
         }
-        Button settingsButton = (Button) findViewById(R.id.settings_button);
-        if(settingsButton!=null){
-            settingsButton.setOnClickListener(new View.OnClickListener() {
+        Button readmeButton = (Button) findViewById(R.id.readme_button);
+        if(readmeButton!=null){
+            readmeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+                    Intent intent = new Intent(MainActivity.this,ReadMeActivity.class);
                     startActivity(intent);
                 }
             });

@@ -42,15 +42,24 @@ public class ScoreScreenActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent returnIntent = new Intent(ScoreScreenActivity.this, MainActivity.class);
                     startActivity(returnIntent);
+                    finish();
                 }
             });
         }
-
     }
+
+    @Override
+    public void onBackPressed(){
+        System.out.println("this isn't printed either");
+        // AlertDialog happens here
+    }
+
+    // Copy & Pasted from another StackOverFlow (http://stackoverflow.com/questions/16646301/onbackpressed-is-not-being-called)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        System.out.println("SCOREWSCREEN: onKeyDown!!!!");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.e("back",""+1);
+            Log.d("back","WHAT IS HAPPENING");
             Intent i=new Intent(ScoreScreenActivity.this,PlayActivity.class);
             startActivity(i);
             finish();

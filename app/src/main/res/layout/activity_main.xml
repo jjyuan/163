@@ -50,11 +50,11 @@
             android:background="@drawable/cardslot"/>
 
         <Button
-            android:id="@+id/settings_button"
+            android:id="@+id/readme_button"
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
+            android:text="@string/readme"
             android:textAllCaps="false"
             android:textSize="@dimen/regular_text_size"
             android:textColor="@color/Black"

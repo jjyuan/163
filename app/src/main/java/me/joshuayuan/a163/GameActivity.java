@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.TransitionDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
                     System.out.println("game: " + mScore);
                     intent.putExtra("mScore", mScore);
                     startActivity(intent);
+                    finish();
                 }
             }, timeLimit);
         }
@@ -480,6 +483,23 @@ public class GameActivity extends AppCompatActivity {
             td.startTransition(10);
             td.reverseTransition(500);
         }
+    }
+
+    // Copy & Pasted from another StackOverFlow (http://stackoverflow.com/questions/16646301/onbackpressed-is-not-being-called)
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        System.out.println("BACK BUTTON PRESSED!!! GAMEACTIVITY");
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Log.d("back", "should go back to PlayActivity");
+            if (mTimer!= null){
+
+                mTimer.cancel();
+            }
+            Intent i=new Intent(GameActivity.this, PlayActivity.class);
+            startActivity(i);
+            finish();
+        }
+        return true;
     }
 
 }
