@@ -58,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
         int timeLimit = 0;
         Intent prevIntent = getIntent();
         timeLimit = prevIntent.getIntExtra("time", timeLimit);
-        System.out.println("RECEIVED TIME: \t" + timeLimit);
+//        System.out.println("RECEIVED TIME: \t" + timeLimit);
 
         if (timeLimit != 0) {
             mTimer = new Timer();
@@ -66,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent intent = new Intent(GameActivity.this, ScoreScreenActivity.class);
-                    System.out.println("game: " + mScore);
+//                    System.out.println("game: " + mScore);
                     intent.putExtra("mScore", mScore);
                     startActivity(intent);
                     finish();
@@ -90,7 +90,7 @@ public class GameActivity extends AppCompatActivity {
                     } else {
                         mTheQ.remove(c);
                     }
-                    System.out.println(mTheQ);
+//                    System.out.println(mTheQ);
                     reDrawSlots();
 
                 }
@@ -112,7 +112,7 @@ public class GameActivity extends AppCompatActivity {
                     } else {
                         mTheQ.remove(c);
                     }
-                    System.out.println(mTheQ);
+//                    System.out.println(mTheQ);
                     reDrawSlots();
 
                 }
@@ -200,7 +200,7 @@ public class GameActivity extends AppCompatActivity {
                     } else {
                         mTheQ.remove(c);
                     }
-                    System.out.println(mTheQ);
+//                    System.out.println(mTheQ);
                     reDrawSlots();
 
                 }
@@ -212,7 +212,7 @@ public class GameActivity extends AppCompatActivity {
             mOpPLUS.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("BEFORE ANYTHING: " + mTheQ);
+//                    System.out.println("BEFORE ANYTHING: " + mTheQ);
                     if( mTheQ.getSize() >= 2){
 
                         int firstSlotNumber = mTheQ.getFirstNode().getCardSlotNumber();
@@ -224,7 +224,7 @@ public class GameActivity extends AppCompatActivity {
                         reDrawSlots();
                         relabel();
                     }
-                    System.out.println("AFTER EVERYTHING: " + mTheQ);
+//                    System.out.println("AFTER EVERYTHING: " + mTheQ);
                 }
             });
         }
@@ -302,7 +302,7 @@ public class GameActivity extends AppCompatActivity {
                         relabel();
                         reDrawSlots();
                     }
-                    System.out.println("*** HERE WE GO ***" + mTheQ);
+//                    System.out.println("*** HERE WE GO ***" + mTheQ);
 
 
                 }
@@ -320,7 +320,7 @@ public class GameActivity extends AppCompatActivity {
                             return true;
                         case MotionEvent.ACTION_UP:
                             Long timing = motionEvent.getEventTime() - motionEvent.getDownTime();
-                            System.out.println("TIME RELAPSED: " + timing);
+//                            System.out.println("TIME RELAPSED: " + timing);
                             if ( timing > 500) {
                                 flash(2);
                                 newCards();
@@ -365,11 +365,11 @@ public class GameActivity extends AppCompatActivity {
     private void newCards(){
         //put random numbers
         ArrayList<Integer> batch = mDeck.drawSix();
-        System.out.print("batch is ");
-        for(int i = 0; i < batch.size(); i++){
-            System.out.print(batch.get(i) + " ");
-        }
-        System.out.println();
+//        System.out.print("batch is ");
+//        for(int i = 0; i < batch.size(); i++){
+//            System.out.print(batch.get(i) + " ");
+//        }
+//        System.out.println();
         for (int i = 0; i < 6; i++) {
             int num = batch.get(i);
 
@@ -402,7 +402,7 @@ public class GameActivity extends AppCompatActivity {
             mCardSlots[i].setmCard( (CardNode) savedInstanceState.getParcelable("cardslot" +(i+1)));
         }
         mTheQ = savedInstanceState.getParcelable("q");
-        System.out.println("HERE WE GO BOYS");
+//        System.out.println("HERE WE GO BOYS");
     }
 
     private void reDrawSlots(){
@@ -488,9 +488,9 @@ public class GameActivity extends AppCompatActivity {
     // Copy & Pasted from another StackOverFlow (http://stackoverflow.com/questions/16646301/onbackpressed-is-not-being-called)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
-        System.out.println("BACK BUTTON PRESSED!!! GAMEACTIVITY");
+//        System.out.println("BACK BUTTON PRESSED!!! GAMEACTIVITY");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d("back", "should go back to PlayActivity");
+//            Log.d("back", "should go back to PlayActivity");
             if (mTimer!= null){
 
                 mTimer.cancel();

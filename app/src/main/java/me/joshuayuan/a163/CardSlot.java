@@ -46,7 +46,7 @@ public class CardSlot extends Button{
     @Override
     public void setText(CharSequence text, BufferType type) {
 
-        System.out.println(text + " is the string and it is " + text.length() +" long");
+//        System.out.println(text + " is the string and it is " + text.length() +" long");
         if ( text.length() > 6) {
             text = text.subSequence(0, 5) + "...";
         }
@@ -64,7 +64,7 @@ public class CardSlot extends Button{
 
     private Bitmap queuedBM(){
         int p = this.mCard.getmPosition();
-        System.out.println(p);
+//        System.out.println(p);
         switch (p){
             case 1:
                 return BitmapFactory.decodeResource(this.mContext.getResources(), R.drawable.queue1);

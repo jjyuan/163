@@ -71,9 +71,9 @@ public class PlayActivity extends AppCompatActivity {
 
                         } else {
                             Intent intent = new Intent(PlayActivity.this, GameActivity.class);
-                            System.out.println("CUSTOM INPUT: \t" + textView.getText().toString());
+//                            System.out.println("CUSTOM INPUT: \t" + textView.getText().toString());
                             double minutes = Double.parseDouble(inputText);
-                            System.out.println("CUSTOMINPUT TWO: \t" + minutes);
+//                            System.out.println("CUSTOMINPUT TWO: \t" + minutes);
                             intent.putExtra("time", (int) (minutes * 1000.0 * 60.0));
                             startActivity(intent);
                             finish();
@@ -100,15 +100,15 @@ public class PlayActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        System.out.println("this isn't printed either");
+//        System.out.println("this isn't printed either");
         // AlertDialog happens here
     }
     // Copy & Pasted from another StackOverFlow (http://stackoverflow.com/questions/16646301/onbackpressed-is-not-being-called)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
-        System.out.println("PLAYACTIVITY: onKeyDown~~~~");
+//        System.out.println("PLAYACTIVITY: onKeyDown~~~~");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d("back", "should go back to MainActivity");
+//            Log.d("back", "should go back to MainActivity");
             Intent i=new Intent(PlayActivity.this, MainActivity.class);
             startActivity(i);
             finish();

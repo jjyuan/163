@@ -54,7 +54,7 @@ public class Queue implements Parcelable {
             CardNode c = sQ.get(i);
             int curr = c.getmPosition();
             c.setmPosition(curr + 1);
-            System.out.println("INCREMENTED <<" +c + ">> from " + curr + " to " + curr+1 );
+//            System.out.println("INCREMENTED <<" +c + ">> from " + curr + " to " + curr+1 );
         }
     }
 
@@ -75,7 +75,7 @@ public class Queue implements Parcelable {
 
         sQ.addFirst(newNode);
         decrement(2);
-        System.out.println(toString());
+//        System.out.println(toString());
 
         if(sQ.size() < 2){
             resetQueue();
@@ -127,9 +127,9 @@ public class Queue implements Parcelable {
     * splits the first node of the queue into its resulting nodes.
      */
     public void splitSmall(CardSlot[] cardSlots){
-        System.out.println("START");
+//        System.out.println("START");
         CardNode nodeToSplit = sQ.peekFirst();
-        System.out.println("nodeToSplit: \t" + nodeToSplit);
+//        System.out.println("nodeToSplit: \t" + nodeToSplit);
         if (nodeToSplit == null){
             return;
         }
@@ -137,9 +137,9 @@ public class Queue implements Parcelable {
             sQ.removeFirst();
             nodeToSplit.setmPosition(0);
             CardNode child1 = nodeToSplit.getmChild1();
-            System.out.println("child1: \t\t" + child1);
+//            System.out.println("child1: \t\t" + child1);
             CardNode child2 = nodeToSplit.getmChild2();
-            System.out.println("child2: \t\t" + child2);
+//            System.out.println("child2: \t\t" + child2);
             int firstSlot = child1.getCardSlotNumber();
             int secondSlot = child2.getCardSlotNumber();
 
@@ -151,10 +151,10 @@ public class Queue implements Parcelable {
             sQ.addFirst(child2);
             sQ.addFirst(child1);
             increment(3); // increments the second and beyond
-            System.out.println("nodeToSplit: \t" + nodeToSplit);
-            System.out.println("child1: \t\t" + child1);
-            System.out.println("child2: \t\t" + child2);
-            System.out.println("END");
+//            System.out.println("nodeToSplit: \t" + nodeToSplit);
+//            System.out.println("child1: \t\t" + child1);
+//            System.out.println("child2: \t\t" + child2);
+//            System.out.println("END");
         }
     }
     public int describeContents(){

@@ -28,7 +28,8 @@ public class ReadMeActivity extends AppCompatActivity {
             String howtoplay = "Select at least 2 cards before you perform the operations " +
                     "(buttons on the bottom of the screen) and then when you select an operator," +
                     " the first two cards in the queue will be operated on.\nWhen you reach 163, " +
-                    "select \"=\" to proceed. \"[-/-]\" is the button for undoing pairs.\n";
+                    "select \"=\" to proceed. \"[-/-]\" is the button for undoing pairs.\nHold" +
+                    " down the \"=\" button to skip a set for a new six cards.\n";
             String misc = "Please contact me (joshuayuan@berkeley.edu) if you have any questions " +
                     "on what is even going on!\n";
             String thanks = "Thanks for taking the time to download this game! :)";
@@ -44,7 +45,7 @@ public class ReadMeActivity extends AppCompatActivity {
             ss.setSpan(new StyleSpan(Typeface.BOLD), 219, 221, 0);
             ss.setSpan(new StyleSpan(Typeface.BOLD), 233, 236, 0);
             ss.setSpan(new StyleSpan(Typeface.BOLD), 291, 294, 0);
-            ss.setSpan(new StyleSpan(Typeface.ITALIC), 642, 667, 0);
+            ss.setSpan(new StyleSpan(Typeface.ITALIC), 701, 726, 0);
 
 //            System.out.println(complete);
 //            Log.d("character: 161", Character.toString(ss.charAt(161)));

@@ -28,7 +28,7 @@ public class Deck {
             int pos = rand.nextInt(deck.size());
             batch.add(deck.get(pos));
             deck.remove(pos);
-            System.out.println(toString());
+//            System.out.println(toString());
         }
         return batch;
     }

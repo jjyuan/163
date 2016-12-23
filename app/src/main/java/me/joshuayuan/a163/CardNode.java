@@ -91,7 +91,7 @@ public class CardNode implements Parcelable{
             return;
         } else{
             traverse(cn.mChild1);
-            System.out.println(cn);
+//            System.out.println(cn);
             traverse(cn.mChild2);
         }
     }

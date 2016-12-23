@@ -23,7 +23,7 @@ public class ScoreScreenActivity extends AppCompatActivity {
         int score = 0;
         Intent intent = getIntent();
         score = intent.getIntExtra("mScore", score);
-        System.out.println(score);
+//        System.out.println(score);
 
         TextView mTV = (TextView) findViewById(R.id.score_text);
         if (mTV != null ){
@@ -50,16 +50,16 @@ public class ScoreScreenActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        System.out.println("this isn't printed either");
+//        System.out.println("this isn't printed either");
         // AlertDialog happens here
     }
 
     // Copy & Pasted from another StackOverFlow (http://stackoverflow.com/questions/16646301/onbackpressed-is-not-being-called)
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
-        System.out.println("SCOREWSCREEN: onKeyDown!!!!");
+//        System.out.println("SCOREWSCREEN: onKeyDown!!!!");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d("back","WHAT IS HAPPENING");
+//            Log.d("back","WHAT IS HAPPENING");
             Intent i=new Intent(ScoreScreenActivity.this,PlayActivity.class);
             startActivity(i);
             finish();
